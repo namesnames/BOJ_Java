@@ -18,6 +18,7 @@ dq = deque()
 l = min(M,N) # 주의 # 껍데기 갯수는 N과 M중 작은 것을 기준으로 정해짐
 
 for i in range(l//2):
+    # 껍질 깎기 
     for c in range(i, M-i):
         dq.append(matrix[i][c]) # 맨위 ->
 
@@ -35,20 +36,21 @@ for i in range(l//2):
 
     dq.rotate(-R)       
 
-    for c in range(cstart+i, cend-i):
-        answer[rstart + i][c] = dq.popleft() # 맨위 ->
+    # 껍질 깎은 방법 그대로 답에 채우기
+    for c in range(i, M-i):
+        answer[i][c] = dq.popleft() # 맨위 ->
 
-    for r in range(rstart+i , rend-i):
-        if(r != rstart+i): # 맨 오른쪽 모서리 중복처리
-            answer[r][cend - i-1] = dq.popleft() # 맨 오른쪽
+    for r in range(i , N-i):
+        if(r != i): # 맨 오른쪽 모서리 중복처리
+            answer[r][M-i-1] = dq.popleft() # 맨 오른쪽
 
-    for c in range(cend - i-1, cstart+i,-1):
-        if(c != cend -i-1):
-            answer[rend - i-1][c] = dq.popleft() # 맨 아래  <-
+    for c in range(M- i-1, i,-1):
+        if(c != M-i-1):
+            answer[N- i-1][c] = dq.popleft() # 맨 아래  <-
 
-    for r in range(rend - i-1, rstart+i ,-1):
-        if(r != rend -i-1 or r != rstart-1):
-            answer[r][cstart +i] = dq.popleft() #맨 왼쪽 
+    for r in range(N- i-1, i ,-1):
+        if(r != N-i-1 or r != i-1):
+            answer[r][i] = dq.popleft() #맨 왼쪽 
 
 for r in answer:
     print(*r)
