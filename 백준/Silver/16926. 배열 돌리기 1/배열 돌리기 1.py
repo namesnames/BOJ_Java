@@ -8,11 +8,6 @@ answer = [[0 for _ in range(M)] for _ in range(N)]
 for r in range(N):
     matrix.append(list(map(int,input().split())))
 
-rstart = 0
-rend = N
-cstart = 0
-cend = M
-
 dq = deque()
 
 l = min(M,N) # 주의 # 껍데기 갯수는 N과 M중 작은 것을 기준으로 정해짐
