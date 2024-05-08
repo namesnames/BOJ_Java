@@ -1,20 +1,20 @@
 with recursive cte as(
-    select id,parent_id, 1 as generation
+    select id, parent_id, 1 as generation
     from ecoli_data
     where parent_id is null
     
     union all
     
-    select a.id, a.parent_id, b.generation + 1 as generation
-    from ecoli_data as a
-    inner join cte b
-    on a.parent_id = b.id
-    )
+    select e.id, e.parent_id, 1 + c.generation as generation
+    from ecoli_data e
+    join cte c
+    on e.parent_id = c.id
+)
 
-select count(generation) as "count", generation
-from cte b
-where b.id not in (select distinct parent_id
-                    from ecoli_data
-                    where parent_id is not null)
+select count(*) as "count", generation
+from cte
+where id not in (select parent_id
+                 from cte
+                 where parent_id is not null)
 group by generation
 order by generation
