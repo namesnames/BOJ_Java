@@ -1,9 +1,11 @@
-with child as(
-    select parent_id, count(parent_id) as child_count
-    from ecoli_data
-    group by parent_id)
-    
-select a.id as "ID", ifnull(c.child_count,0) as "CHILD_COUNT"
-from ecoli_data a 
-left join child c
-on a.id = c.parent_id
+with sub as (select parent_id, count(parent_id) as cnt
+from ecoli_data
+group by parent_id
+having parent_id is not null
+)
+
+select id, ifnull(sub.cnt,0) as child_count
+from ecoli_data e
+left join sub
+on e.id = sub.parent_id
+order by e.id
