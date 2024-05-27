@@ -22,15 +22,14 @@ public class Main {
             arr[i][1] = st.nextToken();
         }
 
-        Arrays.sort(arr, new Comparator<String[]>() {
-                    @Override
-                    public int compare(String[] s1, String[] s2){
-                    if(s1[0] == s2[0]){
-                        return 1; //나이가 같으면 그대로
-                    }
-                    else{
-                        return Integer.parseInt(s1[0]) - Integer.parseInt(s2[0]);
-                    }
+        Arrays.sort(arr, new Comparator<String[]>(){
+            @Override
+            public int compare(String[] s1, String[] s2){
+                if(s1[0] == s2[0]){
+                    return 0;
+                }else{
+                    return Integer.parseInt(s1[0]) - Integer.parseInt(s2[0]);
+                }
             }
         });
 
