@@ -49,8 +49,8 @@ public class Main{
             else{
                 pq.add(temp[1]); //
             }
-            maxNum = Math.max(maxNum, pq.size());
+
         }
-        System.out.println(maxNum);
+        System.out.println(pq.size());
     }
 }
