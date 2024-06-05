@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 
+// PQ쓴 풀이
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -8,23 +9,23 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
-        long[] arr = new long[N];
 
         st = new StringTokenizer(br.readLine());
+        PriorityQueue<Long> pq = new PriorityQueue<>();
         for(int i=0; i<N; i++){
-            arr[i] = Long.parseLong(st.nextToken());
+            pq.add(Long.parseLong(st.nextToken()));
         }
-        Arrays.sort(arr);
 
         for(int i=0; i<M; i++){
-            long num = arr[0] + arr[1];
-            arr[0] = num;
-            arr[1] = num;
-            Arrays.sort(arr);
+            long a = pq.poll();
+            long b = pq.poll();
+            long num = a+b;
+            pq.add(num);
+            pq.add(num);
         }
 
         long answer = 0;
-        for(long a : arr){
+        for(long a : pq){
             answer += a;
         }
         System.out.println(answer);
