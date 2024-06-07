@@ -1,10 +1,13 @@
 import java.io.*;
 import java.util.*;
 
+// 투 포인터
+// for문으로 배열 쭉 돌면서 그 때 기준으로 start, end 정해서 투 포인터 돌린다.
+
 public class Main {
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+        
         int N = Integer.parseInt(br.readLine());
         long[] arr = new long[N];
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -33,7 +36,6 @@ public class Main {
 
                 if(value == 0) {
                     System.out.println(arr[pin] + " " + arr[start] + " " + arr[end]);
-                    System.out.println(" 설마");
                     return;
                 }
                 else if(value > 0 ) end--; // 0보다 크면 오른쪽을 줄이고
