@@ -1,5 +1,3 @@
-
-
 import java.io.*;
 import java.util.*;
 
@@ -12,16 +10,16 @@ public class Main {
     static int find(int startIdx){
         //set에서 하나씩 빼보면서 언제가 가장 끝에 있는지 + 아예 못찾으면 얘를 뺸다
         int targetS = 0;
-        int targetIdx = -1; // 초기값을 -1로 설정
+        int targetIdx = -1;
         for(int s : set){
-            int findIdx = Integer.MAX_VALUE; // 초기값을 Integer.MAX_VALUE로 설정
-            for(int i = startIdx; i < K; i++){
+            int findIdx = 0;
+            for(int i=startIdx; i<K; i++){
                 if(s == arr[i]) {
                     findIdx = i;
                     break;
                 }
             }
-            if(findIdx == Integer.MAX_VALUE) return s; // 찾지 못한 경우 해당 요소 반환
+            if(findIdx == 0) return s;
             if(findIdx > targetIdx){
                 targetIdx = findIdx;
                 targetS = s;
@@ -39,31 +37,36 @@ public class Main {
         arr = new int[K];
 
         st = new StringTokenizer(br.readLine());
-        for(int i = 0; i < K; i++){
+        for(int i=0; i<K; i++){
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
+
         int idx = 0;
-        for(int i = 0; i < K; i++){ // 처음에 플러그 꽂기
+        for(int i=0; i<K; i++){ // 처음에 플러그 꽂기
             if(set.size() == N){
                 idx = i;
                 break;
-            } else {
-                set.add(arr[i]);
             }
+            else set.add(arr[i]);
         }
 
         int cnt = 0;
-        for(int i = idx; i < K; i++){
+        for(int i=idx; i<K; i++){
             // set에 있으면 넘어가고 없으면 하나 빼고 넣어야함
             if(set.contains(arr[i])) continue; // set에 있으면 pass
             else {
-                int toRemove = find(i+1); //set에 없으면 빼는 로직 실행
-                set.remove(toRemove);
+                set.remove(find(i+1)); //set에 없으면 빼는 로직 실행
                 cnt++;
                 set.add(arr[i]); // 뺐으면 새로 넣기
+
+//                for(int s : set){
+//                    System.out.print(s + " ");
+//                }
+//                System.out.println();
             }
         }
         System.out.println(cnt);
+
     }
 }
