@@ -1,6 +1,12 @@
 import java.io.*;
 import java.util.*;
 
+// LCS는 외워야함
+// 문자열 2개를 가로 세로에 배치해서
+// 문자 하나씩 비교해감
+// 두 문자가 같으면 dp[r][c] = dp[r-1][c-1] + 1
+// 다르면 dp[r][c] = max(dp[r-1][c], dp[r][c-1])
+
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
