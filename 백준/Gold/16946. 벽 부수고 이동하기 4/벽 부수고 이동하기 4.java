@@ -1,6 +1,10 @@
 import java.io.*;
 import java.util.*;
 
+// 시간초과난 이유가 2차원 배열을 System.out.print()로 출력해서임..
+// StringBuilder쓰면 시간초과안남
+// 그래프문제는 StringBuilder 써야겠다
+
 public class Main {
 // 0 그룹화 -> O(백만)
 // 벽마다 갈 수 있는 곳 체크 -> 체스판처럼 1010 돼 있을 때, 가장 많이 연산해야하므로 O(50만)추정
