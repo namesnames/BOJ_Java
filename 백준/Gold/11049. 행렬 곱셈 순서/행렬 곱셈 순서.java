@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.*;
 
+// https://www.youtube.com/watch?v=5MXOUix_Ud4&t=1659s
+// 이 강의가 도움이 됨
+
 public class Main {
 
     public static void main(String[] args) throws IOException {
@@ -31,37 +34,22 @@ public class Main {
         for(int r=0; r<N-1; r++){ // r이랑c가 1차이 나는 것먼저
             dp[r][r+1] = m[r][0] * m[r][1] * m[r+1][1];
         }
-//
-//        for(int d=2; d<N; d++){
-//            for(int r=0; r+d<N; r++){
-//                for(int c=r+d; c<N; c++){
-//                    int min = Integer.MAX_VALUE;
-//                    for(int k=r; k<c; k++){
-//                        System.out.println(" r "+r + " k " + k + " | k+1 "+ (k+1) +" c " + c);
-//                        System.out.println(" r "+ r + " c " + c);
-//                        min = Math.min(min, dp[r][k] + dp[k+1][c] + m[r][0]*m[k][1]*m[c][1]);
-//                    }
-//                    dp[r][c] = min;
-//                }
-//            }
-//        }
 
-        for(int d=2; d<N; d++){
+        // 행렬이 
+        // 0 2   1 3   2 4
+        // 0 3   1 4
+        // 0 4 
+        // 이런식으로 진행돼야해서
+        for(int d=2; d<N; d++){ // d는 간격
             for(int r=0; r+d<N; r++){
                 int min = Integer.MAX_VALUE;
-                for(int k=r; k<r+d; k++){
+                for(int k=r; k<r+d; k++){ // 이 부분은 위에 유튜브 강의 링크로 이해
                     min = Math.min(min, dp[r][k]+ dp[k+1][r+d] + m[r][0]*m[k][1]*m[r+d][1]);
                 }
                 dp[r][r+d] = min;
             }
         }
 
-//        for(int r=0; r<N; r++){
-//            for(int c=0; c<N; c++){
-//                System.out.print(dp[r][c] + " ");
-//            }
-//            System.out.println();
-//        }
         System.out.println(dp[0][N-1]);
     }
 }
