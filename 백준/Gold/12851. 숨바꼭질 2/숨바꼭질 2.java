@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.*;
 
+// cnt 배열은 start지점부터 각 지점까지 최소시간으로 도달할 수 있는 모든 경우의 수를 저장해놓음
+// 이렇게 안해도 되지만 해보고 싶어서 GPT도움 받아봄
+
 public class Main {
 
     public static void main(String[] args) throws IOException {
@@ -17,27 +20,26 @@ public class Main {
         Queue<Integer> dq = new ArrayDeque<>();
         dq.add(N);
         V[N] = true;
-        D[N] = 0;
         cnt[N] = 1;
 
         while (!dq.isEmpty()) {
             int cur = dq.poll();
 
-            int[] nextPositions = {cur * 2, cur - 1, cur + 1};
-            for (int next : nextPositions) {
-                if (next >= 0 && next < 100001) {
-                    if (!V[next]) {
-                        dq.add(next);
-                        V[next] = true;
+            int[] nextArr = {cur * 2, cur - 1, cur + 1};
+            for(int next : nextArr){
+                if(0<= next && next < 100001) {
+                    if (V[next] == false) {
                         D[next] = D[cur] + 1;
+                        V[next] = true;
+                        dq.add(next);
                         cnt[next] = cnt[cur];
-                    } else if (D[next] == D[cur] + 1) {
+                    } else if (D[next] == D[cur] + 1){
                         cnt[next] += cnt[cur];
                     }
                 }
             }
-        }
 
+        }
         System.out.println(D[K]);
         System.out.println(cnt[K]);
     }
