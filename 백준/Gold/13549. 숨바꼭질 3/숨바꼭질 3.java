@@ -22,6 +22,8 @@ public class Main {
             int i = dq.poll();
             if(i == dest) break;
 
+            // 순서가 중요
+            // i*2, i-1, i+1 순으로 해야 정답
             int ni = i*2;
             if(0<=ni && ni<=100000 && check[ni] == false){
                 V[ni] = V[i];
@@ -42,11 +44,7 @@ public class Main {
                 check[ni] = true;
                 dq.add(ni);
             }
-
-
-
         }
-
         System.out.println(V[dest]);
     }
 }
