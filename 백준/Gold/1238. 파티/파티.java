@@ -11,7 +11,7 @@ public class Main {
         while(!pq.isEmpty()){
             int[] cur = pq.poll();
 
-            if(dist[cur[0]] < cur[1]) continue;
+            if(dist[cur[0]] <= cur[1]) continue;
 
             dist[cur[0]] = cur[1];
             for(int[] next : list[cur[0]]){
