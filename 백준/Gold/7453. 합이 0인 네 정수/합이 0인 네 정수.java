@@ -57,13 +57,13 @@ public class Main {
                     right--;
                     rightcnt++;
                 }
-                answer += (long) leftcnt * rightcnt;
+                answer += (long) leftcnt * rightcnt; // int * int 결과 자체가 int범위를 넘어갈 수 있기 때문에 (long)으로 타입캐스팅
 
-                // 이 상태로 다시 while돌면 합이 계속 0일테니 움직여준다
+                // 지금 상태는 배열에서 같은 값이 내 옆에 몇 개 있는지 확인한거라
+                // 지금 상태로 while돌면 합이 계속 0일테니 움직여준다
                 left++;
                 right--;
             }
-//            System.out.println("left " + left + " right "+ right);
         }
         System.out.println(answer);
     }
