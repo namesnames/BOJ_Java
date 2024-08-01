@@ -2,69 +2,66 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-
-    static boolean[] alphabet = new boolean[26];
-    static int K;
-    static ArrayList<String> list = new ArrayList<>();
-    static int max = 0;
+    static int[] arr;
+    static String[] strArr;
+    static int target;
+    static int cnt;
+    static int answer;
 
     static int check(){
-        int cnt = 0;
-        for(int i = 0; i < list.size(); i++){
-            String temp = list.get(i);
+        int result = 0;
+        for(String str : strArr){
             boolean flag = true;
-            for(int j = 0; j < temp.length(); j++){
-                if(alphabet[temp.charAt(j) - 97] != true) {
+            for(int i=0; i<str.length(); i++){
+                if(arr[str.charAt(i) - 'a'] == 0){
                     flag = false;
                     break;
                 }
             }
-            if(flag == true) cnt++;
+            if(flag) result++;
         }
-        return cnt;
+        return result;
     }
 
-    // 모든 알파벳들 중에서 K개를 뽑는 함수
-    static void cal(int start, int depth){
-        if(depth == K-5) {
-            max = Math.max(max,check());
+    static void dfs(int idx){
+        if(cnt == target){
+            answer = Math.max(answer, check());
             return;
         }
-        for(int i = start; i < 26; i++){
-            if(alphabet[i]) continue;
-            alphabet[i] = true;
-            cal(i+1, depth+1);
-            alphabet[i] = false;
+        if(idx == 26) return;
+
+        for(int i=idx; i<=25; i++){
+            if(arr[i] == 0){
+                arr[i] = 1;
+                cnt++;
+                dfs(i+1);
+                arr[i] = 0;
+                cnt--;
+            }
         }
 
     }
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
-        K = Integer.parseInt(st.nextToken());
-        alphabet[0] = alphabet[2] = alphabet[8] = alphabet[13] = alphabet[19] = true;
+        int K = Integer.parseInt(st.nextToken());
+        arr = new int[26];
+        arr[0] = 1;
+        arr['t' - 'a'] = 1;
+        arr['i'- 'a'] = 1;
+        arr['c' - 'a'] = 1;
+        arr['n' - 'a'] = 1;
 
-        if(K < 5) {
-            System.out.println(0);
-            return;
+        strArr = new String[N];
+        for(int i=0; i<N; i++){
+            String str = br.readLine();
+            int len = str.length();
+            strArr[i] = str.substring(4,len-4);
         }
-        else if(K == 26) {
-            System.out.println(N);
-            return;
-        }
-        else {
-            for (int i = 0; i < N; i++) {
-                String temp = br.readLine();
-                temp.replace("anta", "");
-                temp.replace("tica", "");
-                list.add(temp);
-            }
-            cal(1,0);
-
-        }
-        System.out.println(max);
+        target = K-5;
+        cnt = 0;
+        dfs(0);
+        System.out.println(answer);
     }
 }
-
