@@ -1,6 +1,10 @@
 import java.io.*;
 import java.util.*;
+// https://www.acmicpc.net/source/81934797 // 이 분 코드 대박
+// 오르막일 때 cnt는 생각했는데 내리막일 때는 못할 거라 생각했음
+// 근데 이 분은 내리막일 때 cnt를 음수로 두고 그냥 했네..
 
+// 내 풀이 right방향으로 한 번, left방향으로 한 번 쓸어가며 오르막일 때만 봄 
 public class Main {
     static public void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -81,9 +85,7 @@ public class Main {
                 }
                 else c--;
             }
-            if(flag) {
-                answer++;
-            }
+            if(flag) answer++;
         }
 
         int[][] rowV = new int[N][N];
@@ -114,8 +116,8 @@ public class Main {
                     }
                 }
                 else r++; //오르막길이면 일단 패스
-
             }
+            
             r = N-1;
             while(r > 0){
                 if(matrix[r][c] - matrix[r-1][c] > 1){
@@ -136,9 +138,6 @@ public class Main {
                                 flag = false;
                                 break;
                             }
-                            else{
-                                rowV[r][c] = 1;
-                            }
                         }
                         else{
                             flag = false;
@@ -149,11 +148,8 @@ public class Main {
                 }
                 else r--;
             }
-            if(flag) {
-                answer++;
-            }
+            if(flag) answer++;
         }
-
         System.out.println(answer);
     }
 }
