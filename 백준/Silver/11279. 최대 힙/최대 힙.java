@@ -15,8 +15,7 @@ public class Main{
                     sb.append(0).append("\n");
                 }
                 else{
-                    sb.append(pq.peek()).append("\n");
-                    pq.poll();
+                    sb.append(pq.poll()).append("\n");
                 }
             }
             else{
