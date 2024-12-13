@@ -8,15 +8,15 @@ class Solution {
     static HashSet<Integer> set;
     static boolean[] V;
     
-    static boolean check(int n) {
-		if(n<2) return false;
-		
-		for(int i=2; i*i<=n; i++) {
-			if(n % i == 0) return false;
-		}
-		
-		return true;
-	}
+    static boolean check(int num){
+        if(num < 2) return false;
+        
+        for(int i=2; i*i <= num; i++){
+            if(num % i == 0) return false;
+        }
+        return true;
+    }
+
     static void dfs(int depth, int limit){       
         if(list.size() == limit){
             String temp = "";
@@ -26,8 +26,8 @@ class Solution {
             int num = Integer.parseInt(temp);
             
             if(check(num)) {
-                if(!set.add(num)) {}
-                else answer++;
+                if(set.add(num)) answer++;
+                
             }
             return;
         }
