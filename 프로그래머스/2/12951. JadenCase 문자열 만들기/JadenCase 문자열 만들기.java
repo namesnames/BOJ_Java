@@ -27,6 +27,7 @@ class Solution {
             {
                 list[i] = (char)(list[i] - 32);
             }
+            // 공백다음에 대문자를 소문자로 변환하지 않도록 주의
             else if(list[i-1] != 32 && 65 <= list[i] && list[i] <= 90)
             {
                 list[i] = (char)(list[i] + 32);
